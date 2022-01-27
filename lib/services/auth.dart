@@ -1,6 +1,8 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gdg_gallery_app_prototype/Models/FBUser.dart';
+import 'package:gdg_gallery_app_prototype/services/database.dart';
 
 class AuthService {
 
@@ -48,6 +50,9 @@ class AuthService {
   Future registerWithEmailAndPassword(String mail, String pass) async {
     try{
       UserCredential res = await _auth.createUserWithEmailAndPassword(email: mail, password: pass);
+
+      await DatabaseService(uid:res.user!.uid).newUser(mail, pass);
+
       return _userFromFirebaseUser(res.user);
     }catch(e){
       print(e.toString());
