@@ -1,6 +1,6 @@
-# gdg_gallery
+# gdg_gallery_app_prototype
 
-A new Flutter project.
+GDG Gallery APP
 
 ## Getting Started
 
