@@ -17,14 +17,20 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -37,31 +43,11 @@ class DefaultFirebaseOptions {
     );
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBSVhMqXggK40kxTUz3bhsOqp9x_sd_I2g',
-    appId: '1:564825007479:web:7d5c37dd2d5458f4946d72',
-    messagingSenderId: '564825007479',
-    projectId: 'gdg-gallery-ffd92',
-    authDomain: 'gdg-gallery-ffd92.firebaseapp.com',
-    storageBucket: 'gdg-gallery-ffd92.appspot.com',
-    measurementId: 'G-JWE4XXKKJG',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAG-vftGdRVJTxx0vBxVvU2-0_7TnaZZdw',
-    appId: '1:564825007479:android:478e7c83a57eecc0946d72',
-    messagingSenderId: '564825007479',
-    projectId: 'gdg-gallery-ffd92',
-    storageBucket: 'gdg-gallery-ffd92.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC9gdfYE8dMEuwKOo3ScRqyp2HYI-qfQss',
-    appId: '1:564825007479:ios:d1e492cffaf4a157946d72',
-    messagingSenderId: '564825007479',
-    projectId: 'gdg-gallery-ffd92',
-    storageBucket: 'gdg-gallery-ffd92.appspot.com',
-    iosClientId: '564825007479-ilkj1sb593d362jtpatd2v9pl1gjlf70.apps.googleusercontent.com',
-    iosBundleId: 'com.example.gdg-gallery',
+    apiKey: 'AIzaSyDzA2h7ufZOTAIOdYwbyvxK9BekeCVNZII',
+    appId: '1:418260995118:android:47d4352c1e217214e963bf',
+    messagingSenderId: '418260995118',
+    projectId: 'gdg-gallery-20990',
+    storageBucket: 'gdg-gallery-20990.appspot.com',
   );
 }
