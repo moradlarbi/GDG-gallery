@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gdg_gallery_app_prototype/Models/Event.dart';
 
 class DatabaseService{
 
@@ -22,4 +23,23 @@ class DatabaseService{
       'password': password
     });
   }
+
+  //event list from snapshot
+  List<Event> _eventListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+
+      Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+
+      List<dynamic> imagesdyn = data['images'];
+      List<String> images = imagesdyn.map((s) => s as String).toList();
+
+      return Event(name: data['name'] ?? '', date: data['date'] ?? '' ,images: images);
+    }).toList();
+  }
+
+  Stream<List<Event>> get events {
+    return eventCollection.snapshots().map(_eventListFromSnapshot);
+  }
+
+
 }

@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gdg_gallery_app_prototype/services/auth.dart';
 import 'package:gdg_gallery_app_prototype/services/storage.dart';
+import 'package:gdg_gallery_app_prototype/Models/Event.dart';
+import 'package:provider/provider.dart';
+import 'package:gdg_gallery_app_prototype/services/database.dart';
+
+import 'EventList.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,11 +15,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService authserv = AuthService();
-    return Container(
+    return StreamProvider<List<Event>?>.value(
+      value: DatabaseService(uid: 'a').events,
+      initialData: null,
       child: Scaffold(
         backgroundColor: Color(0xff00387A),
         appBar: AppBar(
-          title: Text('Home', style: TextStyle(color: Colors.white)),
+          title: Text('Events', style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xff00387A),
           elevation: 0.0,
           actions: <Widget>[
@@ -26,23 +34,12 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-      body: Row(
-        children: [
-          const Text('Home'),
-
-          ]
-       ),
+      body: EventList(),
       ),
     );
   }
 }
 
-Future<Widget?> getImage(BuildContext context, String imageName) async {
-  Image image;
-  await FireStorageService.loadImage(context, imageName).then((value){
 
-    image = Image.network(value.toString(), fit: BoxFit.scaleDown);
-    return image;
-  });
 
-}
+
