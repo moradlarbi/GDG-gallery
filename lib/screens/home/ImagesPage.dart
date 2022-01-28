@@ -21,7 +21,7 @@ class _ImagesPageState extends State<ImagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff00387A),
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text(event.name, style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xff00387A),
